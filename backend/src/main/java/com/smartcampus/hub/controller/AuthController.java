@@ -3,21 +3,37 @@ package com.smartcampus.hub.controller;
 import com.smartcampus.hub.dto.LoginRequest;
 import com.smartcampus.hub.dto.RegisterRequest;
 import com.smartcampus.hub.service.AuthService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.Map;
 
 @RestController
 @RequestMapping("/auth")
-@RequiredArgsConstructor
 public class AuthController {
 
     private final AuthService authService;
+
+    public AuthController(AuthService authService) {
+        this.authService = authService;
+    }
+
+    @PostMapping("/staff")
+    @PreAuthorize("hasRole('ADMIN')")
+    public ResponseEntity<?> createStaff(@RequestBody RegisterRequest request) {
+        try {
+            String result = authService.createStaff(request);
+            return ResponseEntity.ok(Map.of("message", result));
+        } catch (IllegalArgumentException e) {
+            return ResponseEntity.badRequest().body(Map.of("error", e.getMessage()));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(Map.of("error", "Staff creation failed."));
+        }
+    }
 
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RegisterRequest request) {
@@ -40,6 +56,17 @@ public class AuthController {
             return ResponseEntity.status(401).body(Map.of("error", e.getMessage()));
         } catch (Exception e) {
             return ResponseEntity.status(500).body(Map.of("error", "Login failed."));
+        }
+    }
+
+    @PostMapping("/google")
+    public ResponseEntity<?> googleLogin(@RequestBody Map<String, String> body) {
+        try {
+            String googleToken = body.get("token");
+            String token = authService.loginWithGoogle(googleToken);
+            return ResponseEntity.ok(Map.of("token", token));
+        } catch (Exception e) {
+            return ResponseEntity.status(500).body(Map.of("error", "Google login failed."));
         }
     }
 }
