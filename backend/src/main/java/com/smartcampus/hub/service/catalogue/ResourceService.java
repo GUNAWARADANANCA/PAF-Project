@@ -4,7 +4,6 @@ import com.smartcampus.hub.entity.catalogue.Resource;
 import com.smartcampus.hub.enums.catalogue.ResourceStatus;
 import com.smartcampus.hub.enums.catalogue.ResourceType;
 import com.smartcampus.hub.repository.catalogue.ResourceRepository;
-import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -19,11 +18,15 @@ import java.util.Optional;
 import java.util.regex.Pattern;
 
 @Service
-@RequiredArgsConstructor
 public class ResourceService {
 
     private final ResourceRepository resourceRepository;
     private final MongoTemplate mongoTemplate;
+
+    public ResourceService(ResourceRepository resourceRepository, MongoTemplate mongoTemplate) {
+        this.resourceRepository = resourceRepository;
+        this.mongoTemplate = mongoTemplate;
+    }
 
     public Page<Resource> getAllResources(
             String search,
@@ -86,6 +89,9 @@ public class ResourceService {
         
         resource.setName(resourceDetails.getName());
         resource.setDescription(resourceDetails.getDescription());
+        resource.setBuilding(resourceDetails.getBuilding());
+        resource.setFloor(resourceDetails.getFloor());
+        resource.setRoomCode(resourceDetails.getRoomCode());
         resource.setLocation(resourceDetails.getLocation());
         resource.setCapacity(resourceDetails.getCapacity());
         resource.setAvailableFrom(resourceDetails.getAvailableFrom());
@@ -93,6 +99,10 @@ public class ResourceService {
         resource.setType(resourceDetails.getType());
         resource.setStatus(resourceDetails.getStatus());
         resource.setImageUrl(resourceDetails.getImageUrl());
+        resource.setMaxBookingHours(resourceDetails.getMaxBookingHours());
+        resource.setMinAttendees(resourceDetails.getMinAttendees());
+        resource.setMaxAttendees(resourceDetails.getMaxAttendees());
+        resource.setTimeSlots(resourceDetails.getTimeSlots());
         
         return resourceRepository.save(resource);
     }
