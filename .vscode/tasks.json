@@ -1,0 +1,94 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Maven: backend clean install",
+      "type": "shell",
+      "command": "C:\\Users\\BM\\.maven\\apache-maven-3.9.15\\bin\\mvn.cmd",
+      "args": [
+        "-s",
+        "${env:USERPROFILE}\\.m2\\settings.xml",
+        "clean",
+        "install",
+        "-DskipTests"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
+      "problemMatcher": [
+        "$maven-javac"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Maven: backend spring-boot:run",
+      "type": "shell",
+      "command": "C:\\Users\\BM\\.maven\\apache-maven-3.9.15\\bin\\mvn.cmd",
+      "args": [
+        "-s",
+        "${env:USERPROFILE}\\.m2\\settings.xml",
+        "spring-boot:run"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
+      "problemMatcher": [
+        "$maven"
+      ],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    }
+  ]
+}
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Maven: backend clean install",
+      "type": "shell",
+      "command": "C:\\Users\\BM\\.maven\\apache-maven-3.9.15\\bin\\mvn.cmd",
+      "args": [
+        "-s",
+        "${env:USERPROFILE}\\.m2\\settings.xml",
+        "clean",
+        "install",
+        "-DskipTests"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
+      "problemMatcher": [
+        "$maven-javac"
+      ],
+      "group": {
+        "kind": "build",
+        "isDefault": true
+      }
+    },
+    {
+      "label": "Maven: backend spring-boot:run",
+      "type": "shell",
+      "command": "C:\\Users\\BM\\.maven\\apache-maven-3.9.15\\bin\\mvn.cmd",
+      "args": [
+        "-s",
+        "${env:USERPROFILE}\\.m2\\settings.xml",
+        "spring-boot:run"
+      ],
+      "options": {
+        "cwd": "${workspaceFolder}/backend"
+      },
+      "problemMatcher": [
+        "$maven"
+      ],
+      "presentation": {
+        "reveal": "always",
+        "panel": "shared"
+      }
+    }
+  ]
+}

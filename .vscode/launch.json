@@ -1,0 +1,15 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch Backend (Java)",
+      "type": "java",
+      "request": "launch",
+      "mainClass": "com.smartcampus.hub.HubApplication",
+      "cwd": "${workspaceFolder}/backend",
+      "projectName": "hub",
+      "preLaunchTask": "Maven: backend clean install",
+      "args": ""
+    }
+  ]
+}
