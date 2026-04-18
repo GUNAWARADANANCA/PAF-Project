@@ -9,10 +9,7 @@ const RESOURCE_TYPES = [
     'LECTURE_HALL',
     'CLASSROOM',
     'LAB',
-    'MEETING_ROOM',
-    'AUDITORIUM',
-    'EQUIPMENT',
-    'SPORTS_FIELD',
+    
 ];
 
 const RESOURCE_STATUSES = ['ACTIVE', 'OUT_OF_SERVICE', 'MAINTENANCE'];
